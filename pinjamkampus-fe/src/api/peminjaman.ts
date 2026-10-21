@@ -42,3 +42,51 @@ export async function createPeminjaman(
     }),
   })
 }
+
+export async function updatePeminjaman(
+  id: number,
+  input: BuatPeminjamanInput
+): Promise<Peminjaman> {
+  return requestApi<Peminjaman>(`/peminjaman/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      sumber_daya_id: Number(input.sumber_daya_id),
+      peminjam: input.peminjam.trim(),
+      tanggal: input.tanggal,
+      slot_mulai: Number(input.slot_mulai),
+      slot_selesai: Number(input.slot_selesai),
+      jumlah: Number(input.jumlah),
+    }),
+  })
+}
+
+export async function deletePeminjaman(id: number): Promise<void> {
+  return requestApi<void>(`/peminjaman/${id}`, {
+    method: 'DELETE',
+  })
+}
+
+// Persona C endpoints
+export async function setujuiPeminjaman(id: number): Promise<Peminjaman> {
+  return requestApi<Peminjaman>(`/peminjaman/${id}/setujui`, {
+    method: 'POST',
+  })
+}
+
+export async function tolakPeminjaman(
+  id: number,
+  alasan: string
+): Promise<Peminjaman> {
+  return requestApi<Peminjaman>(`/peminjaman/${id}/tolak`, {
+    method: 'POST',
+    body: JSON.stringify({
+      alasan: alasan.trim(),
+    }),
+  })
+}
+
+export async function selesaikanPeminjaman(id: number): Promise<Peminjaman> {
+  return requestApi<Peminjaman>(`/peminjaman/${id}/selesaikan`, {
+    method: 'POST',
+  })
+}

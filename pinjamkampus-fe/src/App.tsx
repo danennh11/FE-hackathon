@@ -22,8 +22,10 @@ export default function App() {
     tanggal: '',
     status: '',
   })
+  const [editingItem, setEditingItem] = useState<Peminjaman | null>(null)
   const [selectedDetail, setSelectedDetail] = useState<Peminjaman | null>(null)
   const [initialLoading, setInitialLoading] = useState(true)
+  const [appError, setAppError] = useState<string | null>(null)
 
   // Fetch Sumber Daya list
   const fetchSumberDaya = useCallback(async () => {
@@ -31,7 +33,11 @@ export default function App() {
       const res = await getSumberDaya()
       setSumberDayaList(res)
     } catch (err) {
-      console.error(err)
+      if (err instanceof Error) {
+        setAppError(err.message)
+      } else {
+        setAppError('Gagal memuat sumber daya: terjadi error.')
+      }
     }
   }, [])
 
@@ -41,7 +47,11 @@ export default function App() {
       const items = await getPeminjaman(currentFilter)
       setPeminjamanList(items)
     } catch (err) {
-      console.error(err)
+      if (err instanceof Error) {
+        setAppError(err.message)
+      } else {
+        setAppError('Gagal memuat daftar peminjaman: terjadi error.')
+      }
     }
   }, [])
 
@@ -50,6 +60,7 @@ export default function App() {
     let mounted = true
     const init = async () => {
       setInitialLoading(true)
+      setAppError(null)
       try {
         const [res, items] = await Promise.all([
           getSumberDaya(),
@@ -60,7 +71,13 @@ export default function App() {
           setPeminjamanList(items)
         }
       } catch (err) {
-        console.error(err)
+        if (mounted) {
+          if (err instanceof Error) {
+            setAppError(err.message)
+          } else {
+            setAppError('Gagal terhubung ke server: terjadi error koneksi.')
+          }
+        }
       } finally {
         if (mounted) {
           setInitialLoading(false)
@@ -82,16 +99,44 @@ export default function App() {
 
   // Handle Detail view
   const handleDetail = async (id: number) => {
+    setAppError(null)
     try {
       const detail = await getPeminjamanById(id)
       setSelectedDetail(detail)
     } catch (err) {
-      console.error(err)
+      if (err instanceof Error) {
+        setAppError(err.message)
+      } else {
+        setAppError('Gagal mengambil detail peminjaman: terjadi error.')
+      }
+    }
+  }
+
+  // Handle Edit click
+  const handleEdit = (item: Peminjaman) => {
+    setEditingItem(item)
+    const formEl = document.querySelector('.peminjaman-form')
+    if (formEl) {
+      formEl.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  // Refresh after list action (Setujui, Tolak, Selesaikan, Hapus)
+  const handleListActionSuccess = async () => {
+    fetchPeminjaman(filter)
+    if (selectedDetail) {
+      try {
+        const updated = await getPeminjamanById(selectedDetail.id)
+        setSelectedDetail(updated)
+      } catch {
+        setSelectedDetail(null)
+      }
     }
   }
 
   // Refresh after form submission
   const handleFormSuccess = () => {
+    setEditingItem(null)
     fetchPeminjaman(filter)
   }
 
@@ -105,6 +150,12 @@ export default function App() {
       {initialLoading && (
         <div className="loading-state">
           <p>Memuat...</p>
+        </div>
+      )}
+
+      {appError && (
+        <div role="alert" className="alert alert-error">
+          {appError}
         </div>
       )}
 
@@ -124,8 +175,11 @@ export default function App() {
             <h2>Peminjaman</h2>
 
             <PeminjamanForm
+              key={editingItem ? `edit-${editingItem.id}` : 'create'}
               sumberDayaList={sumberDayaList}
+              editingItem={editingItem}
               onSuccess={handleFormSuccess}
+              onCancelEdit={() => setEditingItem(null)}
             />
 
             <PeminjamanFilter
@@ -146,6 +200,8 @@ export default function App() {
               items={peminjamanList}
               sumberDayaList={sumberDayaList}
               onDetail={handleDetail}
+              onEdit={handleEdit}
+              onActionSuccess={handleListActionSuccess}
             />
           </section>
         </main>
