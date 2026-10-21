@@ -1,0 +1,314 @@
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.app-header {
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.app-header h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.app-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.loading-state {
+    padding: 32px;
+    text-align: center;
+    font-size: 18px;
+    color: #475569;
+}
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #f87171;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+}
+
+.grid-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .grid-two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+form h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #1e293b;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #0f172a;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.button-group button[type="button"] {
+    background-color: #64748b;
+}
+
+.button-group button[type="button"]:hover:not(:disabled) {
+    background-color: #475569;
+}
+
+.sumber-daya-list-container,
+.peminjaman-list-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+ul[aria-label="Daftar sumber daya"],
+ul[aria-label="Daftar peminjaman"] {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+ul[aria-label="Daftar sumber daya"] li {
+    padding: 10px 14px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+ul[aria-label="Daftar peminjaman"] li {
+    padding: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.peminjaman-info {
+    font-size: 15px;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+.badge-status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-diajukan .badge-status {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-disetujui .badge-status {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-ditolak .badge-status {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-selesai .badge-status {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+.status-dibatalkan .badge-status {
+    background-color: #f1f5f9;
+    color: #64748b;
+}
+
+.peminjaman-alasan {
+    font-size: 14px;
+    color: #b91c1c;
+    background-color: #fef2f2;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #ef4444;
+}
+
+.peminjaman-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.peminjaman-actions button {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.form-penolakan-inline {
+    margin-top: 8px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-penolakan-inline input {
+    padding: 6px 10px;
+}
+
+.peminjaman-filter {
+    background: #f1f5f9;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.peminjaman-filter h3 {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 16px;
+    color: #334155;
+}
+
+.peminjaman-filter div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-peminjaman-card {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.detail-header h3 {
+    margin: 0;
+    color: #1e40af;
+}
+
+.detail-header button {
+    background-color: #94a3b8;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.detail-content p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #1e293b;
+}

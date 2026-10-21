@@ -1,47 +1,36 @@
-# frontend-nrp
+# PinjamKampus - Aplikasi Manajemen Peminjaman Ruang & Alat Kampus
 
-Repo tugas mata kuliah **Frontend**, dibuat dari template [`webdev-if-its/frontend-template`](https://github.com/webdev-if-its/frontend-template). Ganti judul di atas jadi nama repo kalian sendiri (`frontend-nrp`, contoh: `frontend-5025201012`).
+ETS Pemrograman Frontend.
 
-## Aturan Umum
-
-- Tugas tiap pertemuan disimpan di folder `pertemuan-XX/` pada repo ini — masing-masing adalah project Vite + React + TypeScript sendiri (`npm install` terpisah per folder).
-- Commit message wajib menyebut level yang dicapai: `pertemuan-XX: level N selesai`.
-- Deadline push: sebelum pertemuan berikutnya dimulai.
-- Semua level dicek otomatis lewat `npm run levels` (Vitest) — baca `pertemuan-XX/SOAL.md` tiap minggu untuk detail levelnya.
-
-## Mengambil Pertemuan Baru Tiap Minggu
-
-Repo ini **tidak otomatis sinkron** dengan template dosen. Begitu ada pertemuan baru, jalankan (ganti `pertemuan-02` sesuai minggu berjalan):
-
-```bash
-git fetch https://github.com/webdev-if-its/frontend-template.git main
-git checkout FETCH_HEAD -- pertemuan-02
-```
-
-Perintah ini **aman dijalankan kapan pun** — tidak akan menimpa folder pertemuan lain yang sudah kalian kerjakan, karena hanya mengambil folder yang disebutkan. Setelah itu, `cd pertemuan-02 && npm install`, lalu commit folder barunya seperti biasa.
-
-Kalau dosen memperbaiki sesuatu di pertemuan yang sudah dirilis (mis. ada bug di test), biasanya cukup ambil ulang file yang diperbaiki saja, bukan seluruh folder — akan diumumkan file mana yang berubah.
+## Identitas Mahasiswa
+- **Nama:** Danendra Nayottama
+- **NRP:** 5053241032
+- **Persona:** Persona C (Admin Himpunan)
 
 ---
 
-Bagian di bawah ini **isi bertahap** sesuai level yang sedang kalian kerjakan (lihat `pertemuan-XX/SOAL.md`) — heading-nya dicek otomatis, jangan diganti namanya.
+## Status Pengerjaan
 
-## Struktur Project
-(tulis di sini)
+### Checkpoint 1 (Menit 45) - Selesai
+- [x] Inisialisasi repository & project Vite + React + TypeScript
+- [x] **F1: Kelola Sumber Daya**
+  - Form penambahan sumber daya (`Nama sumber daya`, `Jenis`, `Stok`, tombol `Simpan sumber daya`)
+  - Menampilkan daftar sumber daya (`<ul aria-label="Daftar sumber daya">`)
+- [x] **F2: Buat Peminjaman**
+  - Form peminjaman (`Sumber daya`, `Peminjam`, `Tanggal`, `Slot mulai`, `Slot selesai`, `Jumlah`, tombol `Simpan peminjaman`)
+  - Penambahan data langsung memperbarui daftar peminjaman
+- [x] **F3: Lihat Peminjaman**
+  - Filter interaktif (`Filter sumber daya`, `Filter tanggal`, `Filter status`)
+  - Daftar peminjaman (`<ul aria-label="Daftar peminjaman">`) dengan format `Slot X-Y`
+  - Tombol `Detail` dan panel detail (`<section aria-label="Detail peminjaman">`)
 
-## Identitas
-- Nama: (tulis di sini)
-- NRP: (tulis di sini)
-- Kelas: (tulis di sini)
-
-## Commit vs Push
-(tulis di sini)
-
-## JSX vs TSX
-(tulis di sini)
-
-## Kenapa Union Type untuk Status
-(tulis di sini)
-
-## Refleksi
-(tulis di sini)
+### Cara Menjalankan
+1. Jalankan backend:
+   ```bash
+   node server.mjs --persona C
+   ```
+2. Jalankan frontend:
+   ```bash
+   cd pinjamkampus-fe
+   npm run dev
+   ```
